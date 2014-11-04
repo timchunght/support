@@ -1,8 +1,6 @@
 // Requires
 var express = require('express');
 var app = express();
-var redis = require('redis');
-var db = redis.createClient();
 var bodyParser = require('body-parser')
 var fs = require('fs')
 var r = require('jsrsasign');
