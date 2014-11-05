@@ -40,7 +40,7 @@ This code will look for the private key inside a file layer-key.pem.  You will g
 ```
 % heroku config:set LAYER_KEY="-----BEGIN RSA PRIVATE KEY-----
 ...
------END RSA PRIVATE KEY-----""
+-----END RSA PRIVATE KEY-----"
 ```
 
 At this point, you are ready to deploy and start chatting. With Heroku, that's a
