@@ -56,7 +56,7 @@ else{
 
     var claim = JSON.stringify({
       iss: layerProviderID, // The Layer Provider ID
-      prn: req.body.userID, // User Identifier
+      prn: req.body.user_id, // User Identifier
       iat: currentTimeInSeconds, // Integer Time of Token Issuance 
       exp: expirationTime, // Integer Arbitrary time of Token Expiration
       nce: req.body.nonce, //Nonce obtained from the Layer Client SDK
