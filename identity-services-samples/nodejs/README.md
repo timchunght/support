@@ -60,13 +60,14 @@ before:
     % git commit -am "Updating server code"
     % git push heroku master
 
-Usage:
+## Example Usage:
 
-Parameters:
-user_id:  The user ID of the person you want to authenticate
-nonce: The nonce you receive from Layer. See [docs](https://developer.layer.com/docs/guide#authentication) for more info
+###Parameters:
 
-Output:
+* user_id:  The user ID of the person you want to authenticate
+* nonce: The nonce you receive from Layer. See [docs](https://developer.layer.com/docs/guide#authentication) for more info
+
+###Output:
 A JSON object containing the identity_token.
 
 Example Result:
