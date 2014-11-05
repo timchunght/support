@@ -26,13 +26,11 @@ Then create a Heroku application:
 
     % heroku create
     Creating young-waterfall-2641... done, stack is cedar
-    http://ryoung-waterfall-2641.herokuapp.com/ | git@heroku.com:young-waterfall-2641.git
+    http://young-waterfall-2641.herokuapp.com/ | git@heroku.com:young-waterfall-2641.git
     Git remote heroku added
 
 Before you deploy the application, you'll need to configure some environment
-variables for hubot to use. The specific variables you'll need depends on which
-[adapter](../adapters.md) and scripts you are using. For Campfire, with no other
-scripts, you'd need to set the following environment variables:
+variables for the server to use. You can get these values from the Layer Dashboard under Authentication:
 
     % heroku config:set LAYER_PROVIDER_ID=yourlayerproviderid
     % heroku config:set LAYER_KEY_ID=yourlayerkeyid
@@ -61,3 +59,5 @@ before:
 
     % git commit -am "Updating server code"
     % git push heroku master
+
+Instructions inspired by [Deploying Hubot onto Heroku](https://github.com/github/hubot/blob/master/docs/README.md)
