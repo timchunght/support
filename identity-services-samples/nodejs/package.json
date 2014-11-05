@@ -1,0 +1,10 @@
+{
+    "name": "layerauth"
+  , "version": "1.0.0"
+  , "description": "Sample Backed for Layer Authentication"
+  , "dependencies": {
+      "express": "4.x",
+      "body-parser": "1.9.x",      
+	  "jsrsasign": "0.0.3"
+  }
+}

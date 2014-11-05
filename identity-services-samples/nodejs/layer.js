@@ -5,15 +5,45 @@ var bodyParser = require('body-parser')
 var fs = require('fs')
 var r = require('jsrsasign');
 
-// Layer Vars
-var layerProviderID = 'YOUR_PROVIDER_ID_HERE';
-var layerKeyID = 'YOUR_KEY_ID_HERE';
-var privateKey = fs.readFileSync('keys/layer-key.pem');
-
 app.use(bodyParser());
+
+app.get('/', function(req, res) {
+    res.send("Welcome to the Sample Backend for Layer Authentication");  
+});
 
 app.post('/authenticate', function(req, res){
 
+// Layer Vars
+
+ if(!process.env.LAYER_PROVIDER_ID)
+ {
+    res.send("Couldn't find LAYER_PROVIDER_ID");
+ }
+
+ if(!process.env.LAYER_KEY_ID)
+ {
+    res.send("Couldn't find LAYER_KEY_ID");
+ }
+
+
+// Get Provider and Key ID's from Heroku Environment Variables
+var layerProviderID = process.env.LAYER_PROVIDER_ID;
+var layerKeyID = process.env.LAYER_KEY_ID;
+
+// Obtain Private Key from Layer Dashboard
+// Try to get the file from the layer-key.pem file
+if (fs.existsSync('layer-key.pem')) {
+  var privateKey = fs.readFileSync('layer-key.pem');  
+}
+else{
+    // If layer-key.pem file doesn't exist, try the Heroku Environment Variables
+  var privateKey = process.env.LAYER_KEY;
+}
+
+ if(!privateKey)
+ {
+    res.send("Couldn't find Layer Private Key");
+ }
     var header =  JSON.stringify({
       typ: "JWS", // Expresses a MIMEType of application/JWS
       alg: "RS256", // Expresses the type of algorithm used to sign the token, must be RS256
@@ -36,10 +66,10 @@ app.post('/authenticate', function(req, res){
 
     var jws = r.jws.JWS.sign('RS256', header, claim, privateKey.toString());
 
-    res.json({'identityToken': jws})
+    res.json({'identity_token': jws})
 });
 
-var server = app.listen(3000, function() {
+var server = app.listen(process.env.PORT || 3000, function() {
 
     console.log('Listening on port %d', server.address().port);
 
