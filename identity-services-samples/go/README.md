@@ -8,7 +8,7 @@ The code in this folder represent a simple backend to generate identity tokens u
 * user_id:  The user ID of the person you want to authenticate
 * nonce: The nonce you receive from Layer. See [docs](https://developer.layer.com/docs/guide#authentication) for more info
 
-The example refers to  "<PROVIDER_ID>", "<KEY_ID>", and "<RSA_PRIVATE_KEY>".  These values are provided by  the Layer Dashboard.
+The example refers to  "PROVIDER_ID", "KEY_ID", and "RSA_PRIVATE_KEY".  These values are provided by  the Layer Dashboard.
 
 ###Output:
 A JSON object containing the identity_token.
@@ -21,4 +21,4 @@ Example Result:
 }
 ```
 
-The layer.go code was a joint effort between [Abir Majumdar](https://github.com/maju6406) and [Emil Sjölander](https://gist.github.com/emilsjolander)
+The layer.go code was a joint effort between [Abir Majumdar](https://github.com/maju6406) and [Emil Sjölander](https://github.com/emilsjolander)
