@@ -35,8 +35,9 @@ class IdentityToken
       nce: nonce
     }
   end
-  
+
   def private_key
+    # NOTE: When saving RSA Private Key as a string, escape line breaks with \n.
     OpenSSL::PKey::RSA.new(ENV['LAYER_PRIVATE_KEY'])
   end
 end

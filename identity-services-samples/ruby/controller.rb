@@ -1,3 +1,5 @@
+# NOTE: Assumes you're using Devise for authentication.
+
 class SessionsController < Devise::SessionsController  
   def create
     # NOTE: We disable the session storage for XML/JSON requests. API access is handled purely by Token headers
