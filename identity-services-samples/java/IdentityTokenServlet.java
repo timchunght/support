@@ -10,9 +10,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+// JSONObject can be found here:  https://github.com/netplex/json-smart-v2
 import net.minidev.json.JSONObject;
 
+// JsonObject can be found here: https://code.google.com/p/google-gson/
 import com.google.gson.JsonObject;
+
+// JSONObjectUtils can be found here: https://bitbucket.org/connect2id/nimbus-jose-jwt/wiki/Home
 import com.nimbusds.jose.util.JSONObjectUtils;
 
 import util.IdentityTokenGenerator;

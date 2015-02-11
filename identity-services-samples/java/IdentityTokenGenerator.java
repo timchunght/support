@@ -15,6 +15,7 @@ import java.security.spec.EncodedKeySpec;
 import java.security.spec.InvalidKeySpecException;
 import java.security.spec.PKCS8EncodedKeySpec;
 import java.util.Calendar;
+// JsonToken can be found here: https://code.google.com/p/jsontoken/
 import net.oauth.jsontoken.JsonToken;
 import net.oauth.jsontoken.crypto.RsaSHA256Signer;
 
