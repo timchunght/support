@@ -20,7 +20,7 @@ $tokenClaims = array(
 
 $idToken = JWT::encode($tokenClaims, $privateKey, 'RS256', $KEY_ID);
 
-print '{"identity_token":' . $idToken . '}';
+print '{"identity_token":"' . $idToken . '"}';
 
 openssl_free_key($privateKey);
 
