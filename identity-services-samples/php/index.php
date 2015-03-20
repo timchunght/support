@@ -4,7 +4,7 @@ include 'jwt.php';
 
 $PROVIDER_ID = "PROVIDER_ID";
 $KEY_ID = "KEY_ID";
-$PRIVATE_KEY_FILE = "RSA_PRIVATE_KEY";  //for example : "file:///path/to/file.key"
+$PRIVATE_KEY_FILE = "RSA_PRIVATE_KEY_FILE_PATH";  //for example : "file:///path/to/file.key"
 
 $privateKey = openssl_pkey_get_private($PRIVATE_KEY_FILE);
 
