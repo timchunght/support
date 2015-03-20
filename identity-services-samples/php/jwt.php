@@ -4,7 +4,7 @@ class JWT
 {
     public static function encode($payload, $key, $algo = 'HS256', $keyId = null)
     {
-        $header = array('typ' => 'JWT', 'alg' => $algo, 'cty' => 'layer-eit;v=1', 'kid' => $keyId);
+        $header = array('typ' => 'JWS', 'alg' => $algo, 'cty' => 'layer-eit;v=1', 'kid' => $keyId);
 
         $segments = array(
             JWT::urlsafeB64Encode(json_encode($header)),
