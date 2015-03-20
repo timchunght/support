@@ -2,9 +2,9 @@
 
 include 'jwt.php';
 
-$PROVIDER_ID = "ENTER LAYER PROVIDER ID HERE";
-$KEY_ID = "ENTER LAYER KEY ID HERE";
-$PRIVATE_KEY_FILE = "ENTER LOCATION OF PRIVATE KEY FILE";  //for example : "file:///path/to/file.key"
+$PROVIDER_ID = "PROVIDER_ID";
+$KEY_ID = "KEY_ID";
+$PRIVATE_KEY_FILE = "RSA_PRIVATE_KEY";  //for example : "file:///path/to/file.key"
 
 $privateKey = openssl_pkey_get_private($PRIVATE_KEY_FILE);
 
