@@ -1,5 +1,5 @@
 
-The code in this folder represent a simple backend to generate identity tokens using PHP. This has been tested against PHP 5. 
+The code in this folder represent a simple backend to generate identity tokens using PHP. The scripts should weork against PHP 5.3+. 
 
 ## Example Usage:
 
