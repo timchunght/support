@@ -1,14 +1,24 @@
-def getIdentityToken (request):
-    #Grab nonce from request
+# -*- coding: utf-8 -*-
+import os
+from datetime import timedelta, datetime
+
+# Third party
+import jwt
+from Crypto.PublicKey import RSA
+from django.http.response import HttpResponse
+
+
+def get_identity_token(request):
+    # Grab nonce from request
     nonce = request.POST['nonce']
 
-    #Read RSA key
+    # Read RSA key
     root = os.path.dirname(__file__)
     with open(os.path.join(root, "layer.pem"), 'r') as rsa_priv_file:
         priv_rsakey = RSA.importKey(rsa_priv_file.read())
 
-    #Create identity token
-    #Make sure you have PyJWT and PyCrypto libraries installed and imported
+    # Create identity token
+    # Make sure you have PyJWT and PyCrypto libraries installed and imported
     identityToken = jwt.encode(
         payload={
             "iss": "00c39b0c-2e21-11e4-9001-4d6602005389",  # The Layer Provider ID
@@ -17,8 +27,8 @@ def getIdentityToken (request):
             "exp": datetime.utcnow() + timedelta(seconds=30),   # Integer - Arbitrary time of Token Expiration in RFC 3339 seconds
             "nce": nonce                                    # The nonce obtained via the Layer client SDK.
         },
-        key=priv_rsakey,
-        headers = {
+        key=priv_rsakey.exportKey(),
+        headers={
             "typ": "JWS",               # String - Expresses a MIME Type of application/JWS
             "alg": "RS256",             # String - Expresses the type of algorithm used to sign the token, must be RS256
             "cty": "layer-eit;v=1",     # String - Express a Content Type of Layer External Identity Token, version 1
@@ -26,7 +36,5 @@ def getIdentityToken (request):
         },
         algorithm='RS256'
     )
-
-    print identityToken
 
     return HttpResponse(identityToken)
