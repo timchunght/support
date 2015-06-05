@@ -25,7 +25,7 @@ def getIdentityToken (request):
         },
         key=priv_rsakey,
         headers = {
-            "typ": "JWS",               # String - Expresses a MIME Type of application/JWS
+            "typ": "JWT",               # String - Expresses a MIME Type of application/JWT
             "alg": "RS256",             # String - Expresses the type of algorithm used to sign the token, must be RS256
             "cty": "layer-eit;v=1",     # String - Express a Content Type of Layer External Identity Token, version 1
             "kid": KEY_ID               # String - Private Key associated with "layer.pem", found in the Layer Dashboard
