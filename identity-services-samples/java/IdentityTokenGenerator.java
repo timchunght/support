@@ -44,7 +44,7 @@ public class IdentityTokenGenerator {
 		JsonToken token = new JsonToken(signer);
 		JsonObject header = token.getHeader();
 		
-		header.addProperty("typ", "JWS");
+		header.addProperty("typ", "JWT");
 		header.addProperty("alg", "RS256");
 		header.addProperty("cty", "layer-eit;v=1");
 		header.addProperty("kid", LAYER_KEY_ID);
