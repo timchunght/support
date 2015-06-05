@@ -45,7 +45,7 @@ else{
     res.send("Couldn't find Layer Private Key");
  }
     var header =  JSON.stringify({
-      typ: "JWS", // Expresses a MIMEType of application/JWS
+      typ: "JWT", // Expresses a MIMEType of application/JWT
       alg: "RS256", // Expresses the type of algorithm used to sign the token, must be RS256
       cty: "layer-eit;v=1", // Express a Content Type of application/layer-eit;v=1
       kid: layerKeyID,
