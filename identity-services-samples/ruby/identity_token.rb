@@ -8,7 +8,7 @@ class IdentityToken
     @nonce = options[:nonce]
     @expires_at = (options[:expires_at] || 2.weeks.from_now)
     @jwt = JSON::JWT.new(claim)
-    @jwt.header['typ'] = 'JWS'
+    @jwt.header['typ'] = 'JWT'
     @jwt.header['cty'] = 'layer-eit;v=1'
     @jwt.header['kid'] = layer_key_id
   end
