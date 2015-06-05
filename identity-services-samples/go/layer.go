@@ -33,7 +33,7 @@ func authenticate(w http.ResponseWriter, r *http.Request) {
 	token := jwt.New(jwt.GetSigningMethod("RS256"))
 
 	// Set header values
-	token.Header["typ"] = "JWS"
+	token.Header["typ"] = "JWT"
 	token.Header["alg"] = "RS256"
 	token.Header["cty"] = "layer-eit;v=1"
 	token.Header["kid"] = LayerKeyId
