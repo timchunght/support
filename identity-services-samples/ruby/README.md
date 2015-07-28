@@ -10,7 +10,7 @@ You will also need to define the following ENV variables:
 
 * `layer_provider_id` - Provider ID found in the Layer Dashboard under "Authentication"
 * `layer_key_id` - Public key generated and stored in the Layer Dashboard under "Authentication"
-* `private_key` - Private key associated with the public key
+* `layer_private_key` - Private key associated with the public key
 
 
 ###Output:
