@@ -62,8 +62,6 @@ else{
       nce: req.body.nonce, //Nonce obtained from the Layer Client SDK
     });
 
-    console.log(new r.Signature());
-
     var jws = r.jws.JWS.sign('RS256', header, claim, privateKey.toString());
 
     res.json({'identity_token': jws})
