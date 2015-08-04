@@ -1,26 +1,56 @@
+# Overview
 
-The code in this folder represents a simple backend to generate identity tokens using Python.
+The code in this folder provides examples for creating a Layer Identity Token
+for both the Flask and Django web frameworks.
 
-### Setup:
+Each example shows how to create an endpoint, `identity_token`, that requires
+the following parameters:
 
-You will need to define the following variables:
+* `user_id`:  The user ID of the user you want to authenticate.
+* `nonce`: The nonce you receive from Layer. See [docs](https://developer.layer.com/docs/guide#authentication) for more info.
 
-* `PROVIDER_ID` - Provider ID found in the Layer Dashboard under "Authentication"
-* `KEY_ID` - Public key generated and stored in the Layer Dashboard under "Authentication"
-* `RSA_KEY_PATH` - Path to the file containing the private key associated with the public key
+#### Response
 
-### Parameters
+Upon success, the endpoint will return a JSON object that contains a single key, `identity_token`. If the required input parameters were not provided, the
+endpoint will respond with "Invalid response."
 
-* user_id:  The user ID of the person you want to authenticate
-* nonce: The nonce you receive from Layer. See [docs](https://developer.layer.com/docs/guide#authentication) for more info
-
-### Output:
-A JSON object containing the identity_token.
-
-Example Result:
+Example successful response:
 
 ```json
 {
-"identity_token": "eyJ0eXAiOiJKV1MiLCJhbGciOiJSUzI1NiIsImN0eSI6ImxheWVyLWVpdDt2PTEiLCJraWQiOiI2OWZkZDVhYS02NDc4LTExZTQtOTdmMS0xZGVkMDAwMDAwZTYifQ.eyJpc3MiOiI1YTczMWE0Yy02M2JlLTExZTQtOTEyNC1hYWE1MDIwMDc1ZjgiLCJpYXQiOjE0MTUxNTExMTcsImV4cCI6MTQxNTE2MTExNywibmNlIjoibkcrWHZFb0c3dDBXSEZrZjN0QmlWdEdjekFsTXArUmwydXVqWkN0TVJsSEcxb1FVU05BSXZnM0ZTbnFzTDhiNlFFK2pIZU8vZHJsZ2FJNXJnRXVIR2c9PSJ9.SPVPzzN7S09OafQZV7E_LvHF1mmvj5VU0Kn780ef4tegwLUS_pYj7ODfgSZPS2-MNRFhYb5ACZqtoxNkv32CJBzJzFuwBkZ3CsuX8xdpeXWEqvYtK2OV73x1TNA8RGmWyVjVKq7xjpGUORkLk7KQW3QRrQGSVx_jeOiUxb9HvZI"
+"identity_token": "eyJ0eXAiOiJKV1Mi..."
 }
 ```
+
+### Python setup
+
+For both examples, you need to first install the required Python libraries:
+
+* PyJWT - The officially supported JWT library for Python
+* pycrypto - Provides RSA signing capabilities for PyJWT
+
+To install these modules, run the following command:
+
+```console
+pip install -r requirements.txt
+```
+
+_Note: the `pip` command may be `pip3` if you are running Python 3.0+._
+
+### Configure your Layer app
+
+To run either example, there are 3 constants that you should set in layer.py,
+all of which are available in the **Keys** section of the Layer dashboard for
+your app.
+
+* `PROVIDER_ID` - Provider ID found in the Layer Dashboard under
+"Keys"
+* `KEY_ID` - Public key generated and stored in the Layer Dashboard under
+"Keys"
+* `RSA_KEY_PATH` - Path to the file containing the private key associated with
+the public key
+
+### Detailed instructions
+
+* Django - see [DJANGO_README.md](DJANGO_README.md) for instructions
+* Flask - see [FLASK_README.md](FLASK_README.md) for instructions
