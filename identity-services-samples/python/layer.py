@@ -69,8 +69,8 @@ def generate_identity_token(user_id, nonce):
             "prn": user_id,
             # Integer - Time of Token Issuance in RFC 3339 seconds
             "iat": datetime.now(),
-            # Integer - Arbitrary Token Expiration in RFC 3339 seconds
-            "exp": datetime.utcnow() + timedelta(seconds=30),
+            # Integer - Token Expiration in RFC 3339 seconds; set to 2 minutes
+            "exp": datetime.utcnow() + timedelta(seconds=120),
             "nce": nonce    # The nonce obtained via the Layer client SDK.
         },
         key=read_rsa_private_key(),
