@@ -27,31 +27,6 @@ if not (PROVIDER_ID and KEY_ID and RSA_KEY_PATH):
     raise Exception("You must provide PROVIDER_ID, KEY_ID, and "
                     "RSA_KEY_PATH in %s" % __file__)
 
-
-def read_rsa_private_key(file_path=RSA_KEY_PATH):
-    """Reads an RSA private key and returns it in the PEM format.
-
-    :Parameter file_path: The path to the key file.
-        Path can be absolute or relative. Defaults to value of `RSA_KEY_PATH`
-    :Type file_path: string
-
-    :Raise IOError:
-        When the key file is not found.
-    """
-    root = os.path.dirname(__file__)
-    location = os.path.join(root, file_path)
-    if not os.path.isfile(location):
-        raise IOError(
-            "File (%s) not found. Update `RSA_KEY_PATH` "
-            "to the proper path to your private key." % location)
-
-    with open(location, 'r') as rsa_private_key_file:
-        rsa_private_key = RSA.importKey(rsa_private_key_file.read())
-
-    # return the key in PEM (textual) format
-    return rsa_private_key.exportKey().decode("utf8")
-
-
 def generate_identity_token(user_id, nonce):
     """Creates Layer Identity Token
 
@@ -73,7 +48,7 @@ def generate_identity_token(user_id, nonce):
             "exp": datetime.utcnow() + timedelta(seconds=120),
             "nce": nonce    # The nonce obtained via the Layer client SDK.
         },
-        key=read_rsa_private_key(),
+        key=_read_rsa_private_key(),
         headers={
             "typ": "JWT",   # String - Expresses a MIME Type of application/JWT
             # String - Expresses the type of algorithm used to sign the token;
@@ -90,3 +65,26 @@ def generate_identity_token(user_id, nonce):
     )
 
     return jwt_token.decode("utf8")
+
+def _read_rsa_private_key(file_path=RSA_KEY_PATH):
+    """Reads an RSA private key and returns it in the PEM format.
+
+    :Parameter file_path: The path to the key file.
+        Path can be absolute or relative. Defaults to value of `RSA_KEY_PATH`
+    :Type file_path: string
+
+    :Raise IOError:
+        When the key file is not found.
+    """
+    root = os.path.dirname(__file__)
+    location = os.path.join(root, file_path)
+    if not os.path.isfile(location):
+        raise IOError(
+            "File (%s) not found. Update `RSA_KEY_PATH` "
+            "to the proper path to your private key." % location)
+
+    with open(location, 'r') as rsa_private_key_file:
+        rsa_private_key = RSA.importKey(rsa_private_key_file.read())
+
+    # return the key in PEM (textual) format
+    return rsa_private_key.exportKey().decode("utf8")
