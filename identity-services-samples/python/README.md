@@ -44,9 +44,9 @@ all of which are available in the **Keys** section of the Layer dashboard for
 your app.
 
 * `PROVIDER_ID` - Provider ID found in the Layer Dashboard under
-"Authentication"
+"Keys"
 * `KEY_ID` - Public key generated and stored in the Layer Dashboard under
-"Authentication"
+"Keys"
 * `RSA_KEY_PATH` - Path to the file containing the private key associated with
 the public key
 
