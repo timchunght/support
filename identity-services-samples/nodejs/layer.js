@@ -13,6 +13,17 @@ app.get('/', function(req, res) {
   res.send('Welcome to the Sample Backend for Layer Authentication');  
 });
 
+var layerProviderID = process.env.LAYER_PROVIDER_ID;
+var layerKeyID = process.env.LAYER_KEY_ID;
+var privateKey = process.env.PRIVATE_KEY;
+if (!privateKey) {
+  try {
+    privateKey = fs.readFileSync('layer-key.pem').toString();
+  } catch(e) {
+    console.error('Couldn\'t find Private Key file: layer-key.pem');
+  }
+}
+
 app.post('/authenticate', function(req, res) {
   var userId = req.body.user_id;
   var nonce = req.body.nonce;
@@ -20,19 +31,9 @@ app.post('/authenticate', function(req, res) {
   if (!userId) return res.status(400).send('Missing `user_id` body parameter.');
   if (!nonce) return res.status(400).send('Missing `nonce` body parameter.');
   
-  var layerProviderID = process.env.LAYER_PROVIDER_ID;
-  var layerKeyID = process.env.LAYER_KEY_ID;
-  var privateKey = process.env.LAYER_KEY;
-  
   if (!layerProviderID) return res.status(500).send('Couldn\'t find LAYER_PROVIDER_ID');
   if (!layerKeyID) return res.status(500).send('Couldn\'t find LAYER_KEY_ID');
-  if (!privateKey) {
-    try {
-      privateKey = fs.readFileSync('layer-key.pem');  
-    } catch(e) {
-      return res.status(500).send('Couldn\'t find Private Key layer-key.pem');
-    }
-  }
+  if (!privateKey) return res.status(500).send('Couldn\'t find Private Key');
 
   var header = JSON.stringify({
     typ: 'JWT',           // Expresses a MIMEType of application/JWT
@@ -54,7 +55,7 @@ app.post('/authenticate', function(req, res) {
 
   var jws = null;
   try {
-    jws = jsrsasign.jws.JWS.sign('RS256', header, claim, privateKey.toString());
+    jws = jsrsasign.jws.JWS.sign('RS256', header, claim, privateKey);
   } catch(e) {
     return res.status(500).send('Could not create signature. Invalid Private Key: ' + e);
   }

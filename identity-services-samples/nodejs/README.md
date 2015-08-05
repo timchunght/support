@@ -38,7 +38,7 @@ variables for the server to use. You can get these values from the Layer Dashboa
 This code will look for the private key inside a file layer-key.pem.  You will get the private key when you generate a Authentication key in the dashboard.  You can optionally add the private key as a environment variable:
 
 ```
-% heroku config:set LAYER_KEY="-----BEGIN RSA PRIVATE KEY-----
+% heroku config:set PRIVATE_KEY="-----BEGIN RSA PRIVATE KEY-----
 ...
 -----END RSA PRIVATE KEY-----"
 ```
