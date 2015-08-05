@@ -70,6 +70,13 @@ before:
 ###Output:
 A JSON object containing the identity_token.
 
+### Example curl:
+```console
+curl -H "Content-Type: application/json"\
+     -X POST -d '{"user_id":"USER_ID","nonce":"NONCE"}'\
+     https://HEROKU_URL/authenticate
+```
+
 Example Result:
 
 ```json
