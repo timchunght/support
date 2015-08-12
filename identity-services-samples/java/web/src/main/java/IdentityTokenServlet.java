@@ -112,17 +112,17 @@ public class IdentityTokenServlet extends HttpServlet {
      * @param token    the identity token to return
      * @throws IOException if we encounter a problem writing our response
      */
-    private void returnIdentityToken(HttpServletResponse response, String token)
-            throws IOException {
+    private void returnIdentityToken(HttpServletResponse response, String token) throws
+            IOException {
 
         final JsonObject outJson = new JsonObject();
         outJson.addProperty("identity_token", token);
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
-        final ServletOutputStream out = response.getOutputStream();
-        out.write(outJson.toString().getBytes());
-        out.flush();
-        out.close();
+        try (ServletOutputStream out = response.getOutputStream()) {
+            out.write(outJson.toString().getBytes());
+            out.flush();
+        }
     }
 
     /**
@@ -148,17 +148,15 @@ public class IdentityTokenServlet extends HttpServlet {
      * @throws IllegalStateException if unable to obtain a JSON object
      */
     private JsonObject readJsonFromRequest(HttpServletRequest request)
-            throws IllegalStateException {
+            throws IllegalStateException, IOException {
 
         final StringBuilder stringBuilder = new StringBuilder();
+
         String line;
-        try {
-            BufferedReader reader = request.getReader();
+        try (BufferedReader reader = request.getReader()) {
             while ((line = reader.readLine()) != null) {
                 stringBuilder.append(line);
             }
-        } catch (Exception e) {
-            e.printStackTrace();
         }
 
         JsonParser parser = new JsonParser();

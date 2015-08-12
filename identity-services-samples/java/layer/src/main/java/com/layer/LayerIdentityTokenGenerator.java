@@ -97,10 +97,16 @@ public class LayerIdentityTokenGenerator {
      */
     private byte[] readPrivateKeyFromDisk(final String path) throws IOException {
         final File privateKeyFile = new File(path);
-        final DataInputStream dis = new DataInputStream(new FileInputStream(privateKeyFile));
+        final FileInputStream fileInputStream = new FileInputStream(privateKeyFile);
+        final DataInputStream dis = new DataInputStream(fileInputStream);
         final byte[] privateBytes = new byte[(int) privateKeyFile.length()];
-        dis.readFully(privateBytes);
-        dis.close();
+        try {
+            dis.readFully(privateBytes);
+        } catch (IOException ioe) {
+            /** No-op **/
+        } finally {
+            dis.close();
+        }
         return privateBytes;
     }
 

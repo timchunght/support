@@ -1,11 +1,13 @@
 package com.layer;
 
+import java.io.Serializable;
+
 /**
  * Your Layer app's configuration values.
  *
  * All values are available in the Layer Dashboard for your project.
  */
-public class LayerConfig {
+public class LayerConfig implements Serializable {
     private final static String LAYER_KEY_ID = "";
     private final static String LAYER_PROVIDER_ID = "";
     private final static String LAYER_RSA_KEY_PATH = "";

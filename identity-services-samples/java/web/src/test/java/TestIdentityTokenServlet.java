@@ -28,10 +28,10 @@ public class TestIdentityTokenServlet {
     HttpServletResponse mockResponse;
     IdentityTokenServlet servletUnderTest;
 
-    final String VALID_JSON = "{\"nonce\": \"sean\", \"user_id\": \"sean\"}";
-    final String EMPTY_JSON = "{}";
+    private final static String VALID_JSON = "{\"nonce\": \"sean\", \"user_id\": \"sean\"}";
+    private final static String EMPTY_JSON = "{}";
 
-    final class TestServletOutputStream extends ServletOutputStream {
+    private final static class TestServletOutputStream extends ServletOutputStream {
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
 
         public void write(int i) throws IOException {
@@ -118,7 +118,7 @@ public class TestIdentityTokenServlet {
                 will(returnValue(bufferedReader));
 
                 allowing(mockResponse).setContentType("application/json");
-                allowing(mockResponse).setCharacterEncoding("UTF8");
+                allowing(mockResponse).setCharacterEncoding("UTF-8");
 
                 allowing(mockResponse).getOutputStream();
                 will(returnValue(outputStream));
