@@ -2,7 +2,7 @@
 
 The code in this folder provides an example for creating a Layer Identity Token using an HttpServlet.
 
-The example endpoint, `identity-token`, that requires the following parameters:
+The example endpoint, `identity-token`, requires the following parameters:
 * `user_id`: The user ID of the user you want to authenticate.
 * `nonce`: The nonce you receive from Layer. See [docs](https://developer.layer.com/docs/#authentication) for more info.
 
@@ -14,7 +14,7 @@ Example successful response:
 
 ```JSON
 {
-  'identity_token': 'eyJ0eXAiOiJKV1Mi...'
+  "identity_token": "eyJ0eXAiOiJKV1Mi..."
 }
 ```
 
@@ -28,16 +28,17 @@ This code uses the gradle build tool via a gradle wrapper. To initialize your sy
 
 ### Configure your Layer app
 
-You will then need to define the following variables in the `LayerConfig` class:
+You will then need to define the following variables in the `com.layer.LayerConfig` class:
 
-* `LAYER_PROVIDER_ID` - Provider ID found in the Layer Dashboard under "Authentication"
-* `LAYER_KEY_ID` - Public key generated and stored in the Layer Dashboard under "Authentication"
+* `LAYER_PROVIDER_ID` - Provider ID found in the Layer Dashboard under "Keys"
+* `LAYER_KEY_ID` - ID of the public key generated and stored in the Layer Dashboard under "Keys"
 * `LAYER_RSA_KEY_PATH` - Path to the PK8 version of your RSA key (see below)
 
 __Note:__ You must convert your private key to PKCS8 format so that Java can read it:
 
 ```console
-openssl pkcs8 -topk8 -nocrypt -outform DER -in layer.pem -out layer.pk8```
+openssl pkcs8 -topk8 -nocrypt -outform DER -in layer.pem -out layer.pk8
+```
 
 
 ## Running the servlet
@@ -74,4 +75,4 @@ Date: Wed, 12 Aug 2015 03:47:29 GMT
 
 ### Verify the generated token
 
-You should verify the output of the signing request by visiting the **Tools** section of the [Layer dashboard](https://developer.layer.com/dashboard/). Paste the value of the `identity_token` key you received from the output above and click `validate`. You should see "Token valid."
+You should verify the output of the signing request by visiting the **Tools** section of the [Layer Dashboard](https://developer.layer.com/dashboard/). Paste the `identity_token` into the form and click `Validate`. You should see "Token valid."

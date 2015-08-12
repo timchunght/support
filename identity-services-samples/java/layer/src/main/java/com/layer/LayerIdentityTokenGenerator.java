@@ -105,7 +105,7 @@ public class LayerIdentityTokenGenerator {
         } catch (IOException ioe) {
             /** No-op **/
         } finally {
-            dis.close();
+            fileInputStream.close();
         }
         return privateBytes;
     }
