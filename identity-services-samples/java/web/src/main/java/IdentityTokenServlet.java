@@ -118,7 +118,7 @@ public class IdentityTokenServlet extends HttpServlet {
         final JsonObject outJson = new JsonObject();
         outJson.addProperty("identity_token", token);
         response.setContentType("application/json");
-        response.setCharacterEncoding("UTF8");
+        response.setCharacterEncoding("UTF-8");
         final ServletOutputStream out = response.getOutputStream();
         out.write(outJson.toString().getBytes());
         out.flush();
